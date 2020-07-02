@@ -1,25 +1,7 @@
 package tree;
 public class Tree {
 
-    private static class Queueu {
-
-        public Queueu() {
-        }
-
-        private void enqueue(Node Node) {
-            throw new UnsupportedOperationException("Not yet implemented");
-        }
-
-        private boolean isEmpty() {
-            throw new UnsupportedOperationException("Not yet implemented");
-        }
-
-        private Node dequeue() {
-            throw new UnsupportedOperationException("Not yet implemented");
-        }
-    }
     Node root;
-    private Node Node;
 
     boolean isEmpty() {
         if (root == null) {
@@ -74,6 +56,39 @@ public class Tree {
         }
     }
 
+    void levelOrder() {
+        Queueu Q = null;
+        Q.enqueue(root);
+        while (!Q.isEmpty()) {
+            Node n = Q.dequeue();
+            System.out.println(n.data);
+            if (n.hasLeft()) {
+                Q.enqueue(n.left);
+            }
+            if (n.hasRight()) {
+                Q.enqueue(n.right);
+            }
+        }
+    }
+
+    private static class Queueu {
+
+        public Queueu() {
+        }
+
+        private void enqueue(Node root) {
+            throw new UnsupportedOperationException("Not yet implemented");
+        }
+
+        private boolean isEmpty() {
+            throw new UnsupportedOperationException("Not yet implemented");
+        }
+
+        private Node dequeue() {
+            throw new UnsupportedOperationException("Not yet implemented");
+        }
+    }
+
     Node find(Node n, int x) {
         if (n == null) {
             return null;
@@ -108,6 +123,7 @@ public class Tree {
             return 0;
         }
         int u = height(n.left);
+
         int v = height(n.right);
         if (u > v) {
             return u + 1;
@@ -116,11 +132,11 @@ public class Tree {
         }
     }
 
-    Node findMin(Node n) {
+    int findMin(Node n) {
         if (root == null) {
-            return null; // pengggunaan data
+            return 0;
         } else if (n.left == null) {
-            return n; //pencarian data
+            return n.data;
         } else {
             return findMin(n.left);
         }
@@ -138,25 +154,6 @@ public class Tree {
         }
         if (n.right == null && n.left == null) {
             System.out.println(n.data);
-        }
-    }
-
-    void levelOrder() {
-        Queueu Q = null;
-        Q.enqueue(root);
-
-        while (!Q.isEmpty()) {
-            Node n = Q.dequeue();
-            System.out.println(n.data);
-
-            if (n.hasLeft()) {
-                Q.enqueue(n.left);
-            }
-
-            if (n.hasRight()) {
-                Q.enqueue(n.right);
-            }
-
         }
     }
 }
